@@ -1,0 +1,47 @@
+/* ============== Fonts ============== */
+@font-face {
+  font-family: "Dana Regular";
+  src: url("fonts/Dana-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Dana Medium";
+  src: url("fonts/Dana-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Dana DemiBold";
+  src: url("fonts/Dana-DemiBold.woff2") format("woff2");
+}
+
+/* ============== Default Styles ============== */
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+}
+
+*,
+*::before,
+*::after {
+  outline: none;
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.6;
+  font-size: 1.6rem;
+  font-family: "Dana Regular";
+}
+
+a {
+  text-decoration: none;
+  transition: all 400ms ease;
+}
+
+/* ============== Utility Classes ============== */
+.container {
+  width: min(100% - 30px, 1320px);
+  margin-inline: auto;
+}

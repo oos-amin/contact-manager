@@ -45,3 +45,13 @@ a {
   width: min(100% - 30px, 1320px);
   margin-inline: auto;
 }
+
+/* ============== Main ============== */
+.main {
+  margin: 4rem 0;
+}
+
+/* ============== Section: Contact header ============== */
+.contact-header__caption {
+  color: #4a5565;
+}

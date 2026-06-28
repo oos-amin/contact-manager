@@ -46,6 +46,16 @@ a {
   margin-inline: auto;
 }
 
+.btn {
+  font-family: "Dana";
+  font-size: 1.6rem;
+  border: none;
+  background-color: #155dfc;
+  color: #fff;
+  padding: 0.8rem 2.4rem;
+  border-radius: 0.625rem;
+}
+
 /* ============== Main ============== */
 .main {
   margin: 4rem 0;
@@ -54,4 +64,84 @@ a {
 /* ============== Section: Contact header ============== */
 .contact-header__caption {
   color: #4a5565;
+}
+
+/* ============== Section: Contact search ============== */
+.contact-search {
+  display: flex;
+  align-items: center;
+  margin: 3rem 0 2rem 0;
+  gap: 1.5rem;
+}
+
+.contact-search__wrapper {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.contact-search__input {
+  border: solid 1px #a5a5a5;
+  border-radius: 0.9rem;
+  padding: 0.5rem 2rem;
+  width: 100%;
+  font-family: "Dana";
+  padding: 0.8rem 4rem 0.8rem 2rem;
+  font-size: 1.6rem;
+  transition: all 0.2s ease;
+  border-color: #cdcdcd;
+}
+
+.contact-search__input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+.contact-search__input::placeholder {
+  font-size: 1.6rem;
+  color: #99a1af;
+}
+
+.contact-search__wrapper svg {
+  position: absolute;
+  right: 1rem;
+  top: 0.9rem;
+  color: #99a1af;
+}
+
+.contact-search__btn-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.contact-search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.1s ease;
+  cursor: pointer;
+}
+
+.contact-search-btn:hover {
+  background-color: #0040ff;
+}
+
+.contact-search-btn:active {
+  transform: scale(0.9);
+}
+
+/* ============== Media Queries ============== */
+
+@media (max-width: 480px) {
+  .contact-search {
+    flex-direction: column;
+  }
+  .contact-search__wrapper {
+    width: 100%;
+  }
+  .contact-search-btn {
+    width: 100%;
+  }
 }

@@ -46,6 +46,11 @@ button {
   background-color: transparent;
   outline: none;
   cursor: pointer;
+  font-family: "Dana";
+}
+
+input {
+  font-family: "Dana";
 }
 
 /* ============== Utility Classes ============== */

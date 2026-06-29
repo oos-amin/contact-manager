@@ -341,6 +341,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .add-modal__label {
@@ -372,9 +373,17 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .add-modal__phone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.add-modal__tag {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -419,6 +428,30 @@ button {
   background-color: transparent;
   border: solid 1px #a5a5a5;
   color: #000;
+}
+
+.error {
+  color: red;
+  font-size: 1.3rem;
+}
+
+/* ============== No Contacts ============== */
+
+.contacts__container .no-contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contacts__container:has(.no-contact) {
+  grid-template-columns: none;
+  align-content: unset;
+}
+
+.no-contact__caption {
+  color: #4e5460;
 }
 
 /* ============== Media Queries ============== */

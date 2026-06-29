@@ -54,6 +54,10 @@ button {
   margin-inline: auto;
 }
 
+button {
+  font-family: "Dana";
+}
+
 .btn {
   font-family: "Dana";
   font-size: 1.6rem;
@@ -62,6 +66,31 @@ button {
   color: #fff;
   padding: 0.8rem 2.4rem;
   border-radius: 0.625rem;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #0040ff;
+  color: #fff;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 12;
+  transition-duration: 300ms;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* ============== Main ============== */
@@ -130,10 +159,6 @@ button {
   gap: 0.5rem;
   transition: all 0.1s ease;
   cursor: pointer;
-}
-
-.contact-search-btn:hover {
-  background-color: #0040ff;
 }
 
 .contact-search-btn:active {
@@ -293,6 +318,109 @@ button {
   color: #fff;
 }
 
+/* ============== Modal: Add Contact ============== */
+.modal-screen {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+.add-modal__title {
+  font-weight: lighter;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.add-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.add-modal__name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.add-modal__label {
+  color: #4a5565;
+  font-family: "Dana Medium";
+}
+
+.add-modal__input {
+  border: solid 1px #a5a5a5;
+  border-radius: 0.9rem;
+  width: 38rem;
+  font-family: "Dana";
+  padding: 0.8rem 1.2rem;
+  font-size: 1.6rem;
+  transition: all 0.2s ease;
+  border-color: #cdcdcd;
+}
+
+.add-modal__input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.35);
+}
+
+.add-modal__input::placeholder {
+  color: #8f8f8fde;
+}
+
+.add-modal__email {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.add-modal__phone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.add-modal__actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.add-modal__btn-confirm {
+  font-family: "Dana SemiBold";
+}
+
+.add-modal__btn-cancel {
+  background-color: transparent;
+  border: solid 1px #a5a5a5;
+  color: #000;
+  font-family: "Dana SemiBold";
+}
+
+/* ============== Modal: Remove Contact ============== */
+
+.remove-modal__title {
+  font-weight: lighter;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.remove-modal__caption {
+  margin: 1.5rem 0;
+}
+
+.remove-modal__actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.remove-modal__btn-cancel {
+  background-color: transparent;
+  border: solid 1px #a5a5a5;
+  color: #000;
+}
+
 /* ============== Media Queries ============== */
 
 @media (max-width: 1260px) {
@@ -317,6 +445,12 @@ button {
     width: 100%;
   }
   .contact-search-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-modal__input {
     width: 100%;
   }
 }

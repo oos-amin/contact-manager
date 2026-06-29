@@ -896,6 +896,61 @@
         </section>
       </div>
     </main>
-    <script src="script.js"></script>
+
+    <!-- Add Contact Modal -->
+    <div class="add-modal modal hidden">
+      <div class="modal-screen">
+        <h2 class="add-modal__title">افزودن مخاطب جدید</h2>
+        <form class="add-modal__form">
+          <div class="add-modal__name">
+            <label for="" class="add-modal__label">نام *</label>
+            <input
+              type="text"
+              class="add-modal__input"
+              placeholder="محمدامین معینی"
+              autocomplete="none"
+            />
+          </div>
+
+          <div class="add-modal__email">
+            <label for="" class="add-modal__label">ایمیل *</label>
+            <input
+              type="text"
+              class="add-modal__input"
+              placeholder="amin47moeini@gmail.com"
+              autocomplete="none"
+            />
+          </div>
+
+          <div class="add-modal__phone">
+            <label for="" class="add-modal__label">شماره تلفن *</label>
+            <input
+              type="text"
+              class="add-modal__input"
+              placeholder="09139774603"
+              autocomplete="none"
+            />
+          </div>
+
+          <div class="add-modal__actions">
+            <button class="add-modal__btn-confirm btn">افزودن مخاطب</button>
+            <button class="add-modal__btn-cancel btn">انصراف</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Remove Contact Modal -->
+    <div class="remove-modal modal hidden">
+      <div class="modal-screen">
+        <h2 class="remove-modal__title">حذف مخاطب</h2>
+        <p class="remove-modal__caption">آیا از حذف این مخاطب اطمینان دارید؟</p>
+        <div class="remove-modal__actions">
+          <button class="remove-modal__btn-confirm btn">بله</button>
+          <button class="remove-modal__btn-cancel btn">انصراف</button>
+        </div>
+      </div>
+    </div>
+    <script src="scriWpt.js"></script>
   </body>
 </html>

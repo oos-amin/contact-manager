@@ -34,6 +34,10 @@ const editInputEmail = document.querySelector("#edit-input__email");
 const editInputPhone = document.querySelector("#edit-input__phone");
 const editInputTag = document.querySelector("#edit-input__tag");
 
+const toast = document.querySelector(".toast");
+const toastContent = document.querySelector(".toast__content");
+const toastTitle = document.querySelector(".toast__content-title");
+
 let contacts = [];
 
 let contactIdToRemove = null;
@@ -106,6 +110,7 @@ const createContact = () => {
   clearInputs();
   hideAddModal();
   contactsCount();
+  showToast("success", "مخاطب اضافه شد.");
   saveLocalStorage();
 };
 
@@ -182,6 +187,7 @@ const removeContact = () => {
   hideRemoveModal();
   showContact();
   contactsCount();
+  showToast("danger", "مخاطب حذف شد.");
   saveLocalStorage();
   searchInput.value = "";
 };
@@ -202,6 +208,7 @@ const editContact = () => {
   showContact();
   hideEditModal();
   saveLocalStorage();
+  showToast("info", "مخاطب ویرایش شد.");
   searchInput.value = "";
 };
 
@@ -347,6 +354,28 @@ const getLocalStorage = () => {
     contacts = userContact;
     showContact();
   }
+};
+
+const showToast = (status, message) => {
+  toast.classList.add("toast--show");
+
+  if (status === "success") {
+    toastContent.style.backgroundColor = "#55B938";
+  }
+
+  if (status === "info") {
+    toastContent.style.backgroundColor = "#5296d5";
+  }
+
+  if (status === "danger") {
+    toastContent.style.backgroundColor = "#D65745";
+  }
+
+  toastTitle.innerHTML = message;
+
+  setTimeout(() => {
+    toast.classList.remove("toast--show");
+  }, 2000);
 };
 
 window.addEventListener("load", () => {

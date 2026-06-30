@@ -34,7 +34,7 @@ const editInputEmail = document.querySelector("#edit-input__email");
 const editInputPhone = document.querySelector("#edit-input__phone");
 const editInputTag = document.querySelector("#edit-input__tag");
 
-const contacts = [];
+let contacts = [];
 
 let contactIdToRemove = null;
 let contactIdToUpdate = null;
@@ -106,6 +106,7 @@ const createContact = () => {
   clearInputs();
   hideAddModal();
   contactsCount();
+  saveLocalStorage();
 };
 
 const showContact = () => {
@@ -181,6 +182,7 @@ const removeContact = () => {
   hideRemoveModal();
   showContact();
   contactsCount();
+  saveLocalStorage();
   searchInput.value = "";
 };
 
@@ -199,6 +201,7 @@ const editContact = () => {
 
   showContact();
   hideEditModal();
+  saveLocalStorage();
   searchInput.value = "";
 };
 
@@ -333,7 +336,21 @@ const searchContact = () => {
   showFilteredContacts(filteredContacts);
 };
 
+const saveLocalStorage = () => {
+  localStorage.setItem("contacts", JSON.stringify(contacts));
+};
+
+const getLocalStorage = () => {
+  const userContact = JSON.parse(localStorage.getItem("contacts"));
+
+  if (userContact) {
+    contacts = userContact;
+    showContact();
+  }
+};
+
 window.addEventListener("load", () => {
+  getLocalStorage();
   showContact();
   contactsCount();
 });

@@ -347,7 +347,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 1rem;
 }
 
 .add-modal__label {
@@ -379,14 +378,12 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 1rem;
 }
 
 .add-modal__phone {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  margin-bottom: 1rem;
 }
 
 .add-modal__tag {

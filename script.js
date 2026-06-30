@@ -33,6 +33,11 @@ const editInputName = document.querySelector("#edit-input__name");
 const editInputEmail = document.querySelector("#edit-input__email");
 const editInputPhone = document.querySelector("#edit-input__phone");
 const editInputTag = document.querySelector("#edit-input__tag");
+const editNameError = document.querySelector(".edit__name-error");
+const editEmailError = document.querySelector(".edit__email-error");
+const editPhoneError = document.querySelector(".edit__phone-error");
+const editPhoneError2 = document.querySelector(".edit__phone-error2");
+const editTagError = document.querySelector(".edit__tag-error");
 
 const toast = document.querySelector(".toast");
 const toastContent = document.querySelector(".toast__content");
@@ -88,30 +93,32 @@ const createContact = () => {
   const phone = contactInputPhone.value;
   const tag = contactInputTag.value;
 
-  // validateInputs();
+  validateInputs();
 
-  // name.length >= 2 &&
-  //   email.includes("@gmail.com") &&
-  //   phone.length === 11 &&
-  //   !isNaN(phone) &&
-  //   tag.length >= 2;
+  if (
+    name.length >= 2 &&
+    email.includes("@gmail.com") &&
+    phone.length === 11 &&
+    !isNaN(phone) &&
+    tag.length >= 2
+  ) {
+    const newContact = {
+      id: contacts.length + 1,
+      name,
+      email,
+      phone,
+      tag,
+    };
 
-  const newContact = {
-    id: contacts.length + 1,
-    name,
-    email,
-    phone,
-    tag,
-  };
+    contacts.push(newContact);
 
-  contacts.push(newContact);
-
-  showContact();
-  clearInputs();
-  hideAddModal();
-  contactsCount();
-  showToast("success", "مخاطب اضافه شد.");
-  saveLocalStorage();
+    showContact();
+    clearInputs();
+    hideAddModal();
+    contactsCount();
+    showToast("success", "مخاطب اضافه شد.");
+    saveLocalStorage();
+  }
 };
 
 const showContact = () => {
@@ -197,57 +204,109 @@ const editContact = () => {
     return contact.id === contactIdToUpdate;
   });
 
-  contacts[foundIndex] = {
-    id: foundIndex + 1,
-    name: editInputName.value,
-    email: editInputEmail.value,
-    phone: editInputPhone.value,
-    tag: editInputTag.value,
-  };
+  const name = editInputName.value;
+  const email = editInputEmail.value;
+  const phone = editInputPhone.value;
+  const tag = editInputTag.value;
 
-  showContact();
-  hideEditModal();
-  saveLocalStorage();
-  showToast("info", "مخاطب ویرایش شد.");
-  searchInput.value = "";
+  validateEditInputs();
+
+  if (
+    name.length >= 2 &&
+    email.includes("@gmail.com") &&
+    phone.length === 11 &&
+    !isNaN(phone) &&
+    tag.length >= 2
+  ) {
+    contacts[foundIndex] = {
+      id: foundIndex + 1,
+      name,
+      email,
+      phone,
+      tag,
+    };
+
+    showContact();
+    hideEditModal();
+    saveLocalStorage();
+    showToast("info", "مخاطب ویرایش شد.");
+    searchInput.value = "";
+  }
 };
 
-// const validateInputs = () => {
-//   const name = contactInputName.value;
-//   const email = contactInputEmail.value;
-//   const phone = contactInputPhone.value;
-//   const tag = contactInputTag.value;
+const validateInputs = () => {
+  const name = contactInputName.value;
+  const email = contactInputEmail.value;
+  const phone = contactInputPhone.value;
+  const tag = contactInputTag.value;
 
-//   if (name.length < 2) {
-//     inputNameError.innerHTML = `<p class = "error">نام باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
-//   } else {
-//     inputNameError.innerHTML = "";
-//   }
+  if (name.length < 2) {
+    inputNameError.innerHTML = `<p class = "error">نام باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+  } else {
+    inputNameError.innerHTML = "";
+  }
 
-//   if (!email.includes("@gmail.com")) {
-//     inputEmailError.innerHTML = `<p class = "error">ایمیل نامعتبر می‌باشد.</p>`;
-//   } else {
-//     inputEmailError.innerHTML = "";
-//   }
+  if (!email.includes("@gmail.com")) {
+    inputEmailError.innerHTML = `<p class = "error">ایمیل نامعتبر می‌باشد.</p>`;
+  } else {
+    inputEmailError.innerHTML = "";
+  }
 
-//   if (phone.length < 11) {
-//     inputPhoneError.innerHTML = `<p class = "error">شماره تلفن باید 11 کاراکتر باشد.</p>`;
-//   } else {
-//     inputPhoneError.innerHTML = "";
-//   }
+  if (phone.length < 11) {
+    inputPhoneError.innerHTML = `<p class = "error">شماره تلفن باید 11 کاراکتر باشد.</p>`;
+  } else {
+    inputPhoneError.innerHTML = "";
+  }
 
-//   if (isNaN(phone)) {
-//     inputPhoneError2.innerHTML = `<p class = "error">شماره تلفن نمیتواند شامل حروف یا کاراکتر های خاص باشد.</p>`;
-//   } else {
-//     inputPhoneError2.innerHTML = "";
-//   }
+  if (isNaN(phone)) {
+    inputPhoneError2.innerHTML = `<p class = "error">شماره تلفن نمیتواند شامل حروف یا کاراکتر های خاص باشد.</p>`;
+  } else {
+    inputPhoneError2.innerHTML = "";
+  }
 
-//   if (tag.length < 2) {
-//     inputTagError.innerHTML = `<p class = "error">تگ باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
-//   } else {
-//     inputTagError.innerHTML = "";
-//   }
-// };
+  if (tag.length < 2) {
+    inputTagError.innerHTML = `<p class = "error">تگ باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+  } else {
+    inputTagError.innerHTML = "";
+  }
+};
+
+const validateEditInputs = () => {
+  const name = editInputName.value;
+  const email = editInputEmail.value;
+  const phone = editInputPhone.value;
+  const tag = editInputTag.value;
+
+  if (name.length < 2) {
+    editNameError.innerHTML = `<p class = "error">نام باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+  } else {
+    editNameError.innerHTML = "";
+  }
+
+  if (!email.includes("@gmail.com")) {
+    editEmailError.innerHTML = `<p class = "error">ایمیل نامعتبر می‌باشد.</p>`;
+  } else {
+    editEmailError.innerHTML = "";
+  }
+
+  if (phone.length < 11) {
+    editPhoneError.innerHTML = `<p class = "error">شماره تلفن باید 11 کاراکتر باشد.</p>`;
+  } else {
+    editPhoneError.innerHTML = "";
+  }
+
+  if (isNaN(phone)) {
+    editPhoneError2.innerHTML = `<p class = "error">شماره تلفن نمیتواند شامل حروف یا کاراکتر های خاص باشد.</p>`;
+  } else {
+    editPhoneError2.innerHTML = "";
+  }
+
+  if (tag.length < 2) {
+    editTagError.innerHTML = `<p class = "error">تگ باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+  } else {
+    editTagError.innerHTML = "";
+  }
+};
 
 const clearInputs = () => {
   contactInputName.value = "";

@@ -66,7 +66,9 @@
 
         <!-- Contacts -->
         <section class="contacts">
-          <p class="contacts__status">مخاطبین: 23</p>
+          <p class="contacts__status">
+            <!-- Data Loads from JS -->
+          </p>
 
           <div class="contacts__container">
             <!-- Data Loads from JS -->
@@ -142,6 +144,68 @@
         <div class="add-modal__actions">
           <button class="add-modal__btn-confirm btn">افزودن مخاطب</button>
           <button class="add-modal__btn-cancel btn">انصراف</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Contact Modal -->
+    <div class="edit-modal modal hidden">
+      <div class="modal-screen">
+        <h2 class="add-modal__title">ویرایش مخاطب</h2>
+        <div class="add-modal__name">
+          <label for="" class="add-modal__label">نام *</label>
+          <input
+            type="text"
+            class="add-modal__input"
+            placeholder="محمدامین معینی"
+            autocomplete="none"
+            id="edit-input__name"
+          />
+          <p class="input__name-error"></p>
+        </div>
+
+        <div class="add-modal__email">
+          <label for="" class="add-modal__label">ایمیل *</label>
+          <input
+            type="email"
+            class="add-modal__input"
+            placeholder="amin47moeini@gmail.com"
+            autocomplete="none"
+            id="edit-input__email"
+          />
+          <p class="input__email-error"></p>
+        </div>
+
+        <div class="add-modal__phone">
+          <label for="" class="add-modal__label">شماره تلفن *</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            class="add-modal__input"
+            placeholder="09139774603"
+            autocomplete="none"
+            maxlength="11"
+            id="edit-input__phone"
+          />
+          <p class="input__phone-error"></p>
+          <p class="input__phone-error2"></p>
+        </div>
+
+        <div class="add-modal__tag">
+          <label for="" class="add-modal__label">تگ *</label>
+          <input
+            type="text"
+            class="add-modal__input"
+            placeholder="دسته بندی (خانواده، دوست، همکار و ...)"
+            autocomplete="none"
+            id="edit-input__tag"
+          />
+          <p class="input__tag-error"></p>
+        </div>
+
+        <div class="edit-modal__actions">
+          <button class="edit-modal__btn-confirm btn">ویرایش مخاطب</button>
+          <button class="edit-modal__btn-cancel btn">انصراف</button>
         </div>
       </div>
     </div>

@@ -330,7 +330,8 @@ button {
   border-radius: 1rem;
 }
 
-.add-modal__title {
+.add-modal__title,
+.edit-modal__title {
   font-weight: lighter;
   font-size: 2.2rem;
   margin-bottom: 1.5rem;
@@ -394,7 +395,8 @@ button {
   gap: 0.8rem;
 }
 
-.add-modal__actions {
+.add-modal__actions,
+.edit-modal__actions {
   margin-top: 2rem;
   display: flex;
   gap: 1rem;
@@ -404,7 +406,8 @@ button {
   font-family: "Dana SemiBold";
 }
 
-.add-modal__btn-cancel {
+.add-modal__btn-cancel,
+.edit-modal__btn-cancel {
   background-color: transparent;
   border: solid 1px #a5a5a5;
   color: #000;

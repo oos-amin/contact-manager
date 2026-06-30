@@ -7,21 +7,35 @@ const contactStatus = document.querySelector(".contacts__status");
 const contactsContainer = document.querySelector(".contacts__container");
 
 const addModal = document.querySelector(".add-modal");
+const addModalTitle = document.querySelector(".add-modal__title");
 const addModalConfirmBtn = document.querySelector(".add-modal__btn-confirm");
 const addModalCancelBtn = document.querySelector(".add-modal__btn-cancel");
-
 const inputNameError = document.querySelector(".input__name-error");
 const inputEmailError = document.querySelector(".input__email-error");
 const inputPhoneError = document.querySelector(".input__phone-error");
 const inputPhoneError2 = document.querySelector(".input__phone-error2");
 const inputTagError = document.querySelector(".input__tag-error");
-
 const contactInputName = document.querySelector("#contact-input__name");
 const contactInputEmail = document.querySelector("#contact-input__email");
 const contactInputPhone = document.querySelector("#contact-input__phone");
 const contactInputTag = document.querySelector("#contact-input__tag");
 
+const removeModal = document.querySelector(".remove-modal");
+const removeModalConfirm = document.querySelector(".remove-modal__btn-confirm");
+const removeModalCancel = document.querySelector(".remove-modal__btn-cancel");
+
+const editModal = document.querySelector(".edit-modal");
+const editModalConfirm = document.querySelector(".edit-modal__btn-confirm");
+const editModalCancel = document.querySelector(".edit-modal__btn-cancel");
+const editInputName = document.querySelector("#edit-input__name");
+const editInputEmail = document.querySelector("#edit-input__email");
+const editInputPhone = document.querySelector("#edit-input__phone");
+const editInputTag = document.querySelector("#edit-input__tag");
+
 const contacts = [];
+
+let contactIdToRemove = null;
+let contactIdToUpdate = null;
 
 const showAddModal = () => {
   addModal.classList.remove("hidden");
@@ -30,6 +44,32 @@ const showAddModal = () => {
 const hideAddModal = () => {
   addModal.classList.add("hidden");
   clearInputs();
+};
+
+const showEditModal = (contact) => {
+  editModal.classList.remove("hidden");
+  contactIdToUpdate = contact.id;
+
+  editInputName.value = contact.name;
+  editInputEmail.value = contact.email;
+  editInputPhone.value = contact.phone;
+  editInputTag.value = contact.tag;
+};
+
+const hideEditModal = () => {
+  editModal.classList.add("hidden");
+  contactIdToUpdate = null;
+  clearEditInputs();
+};
+
+const showRemoveModal = (contactId) => {
+  removeModal.classList.remove("hidden");
+  contactIdToRemove = contactId;
+};
+
+const hideRemoveModal = () => {
+  removeModal.classList.add("hidden");
+  contactIdToRemove = null;
 };
 
 const contactsCount = () => {
@@ -42,30 +82,29 @@ const createContact = () => {
   const phone = contactInputPhone.value;
   const tag = contactInputTag.value;
 
-  validateInputs();
+  // validateInputs();
 
-  if (
-    name.length >= 2 &&
-    email.includes("@gmail.com") &&
-    phone.length === 11 &&
-    !isNaN(phone) &&
-    tag.length >= 2
-  ) {
-    const newContact = {
-      id: contacts.length + 1,
-      name,
-      email,
-      phone,
-      tag,
-    };
+  // name.length >= 2 &&
+  //   email.includes("@gmail.com") &&
+  //   phone.length === 11 &&
+  //   !isNaN(phone) &&
+  //   tag.length >= 2;
 
-    contacts.push(newContact);
+  const newContact = {
+    id: contacts.length + 1,
+    name,
+    email,
+    phone,
+    tag,
+  };
 
-    showContact();
-    clearInputs();
-    hideAddModal();
-    contactsCount();
-  }
+  contacts.push(newContact);
+
+  showContact();
+  clearInputs();
+  hideAddModal();
+  contactsCount();
+  console.log(contacts);
 };
 
 const showContact = () => {
@@ -80,12 +119,12 @@ const showContact = () => {
           <header class="contact-box__header">
             <span class="contact-box__name">${contact.name}</span>
             <div class="contact-box__buttons">
-              <button class="contact-box__remove">
+              <button class="contact-box__remove" onclick = "showRemoveModal(${contact.id})">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="18" height="18">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"></path>
                 </svg>
               </button>
-              <button class="contact-box__edit">
+              <button class="contact-box__edit" onclick = 'showEditModal(${JSON.stringify(contact)})'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" width="18" height="18">
                   <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"></path>
                 </svg>
@@ -131,42 +170,71 @@ const showContact = () => {
   }
 };
 
-const validateInputs = () => {
-  const name = contactInputName.value;
-  const email = contactInputEmail.value;
-  const phone = contactInputPhone.value;
-  const tag = contactInputTag.value;
+const removeContact = () => {
+  const foundIndex = contacts.findIndex((contact) => {
+    return contact.id === contactIdToRemove;
+  });
 
-  if (name.length < 2) {
-    inputNameError.innerHTML = `<p class = "error">نام باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
-  } else {
-    inputNameError.innerHTML = "";
-  }
+  contacts.splice(foundIndex, 1);
 
-  if (!email.includes("@gmail.com")) {
-    inputEmailError.innerHTML = `<p class = "error">ایمیل نامعتبر می‌باشد.</p>`;
-  } else {
-    inputEmailError.innerHTML = "";
-  }
-
-  if (phone.length < 11) {
-    inputPhoneError.innerHTML = `<p class = "error">شماره تلفن باید 11 کاراکتر باشد.</p>`;
-  } else {
-    inputPhoneError.innerHTML = "";
-  }
-
-  if (isNaN(phone)) {
-    inputPhoneError2.innerHTML = `<p class = "error">شماره تلفن نمیتواند شامل حروف یا کاراکتر های خاص باشد.</p>`;
-  } else {
-    inputPhoneError2.innerHTML = "";
-  }
-
-  if (tag.length < 2) {
-    inputTagError.innerHTML = `<p class = "error">تگ باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
-  } else {
-    inputTagError.innerHTML = "";
-  }
+  hideRemoveModal();
+  showContact();
+  contactsCount();
 };
+
+const editContact = () => {
+  const foundIndex = contacts.findIndex((contact) => {
+    return contact.id === contactIdToUpdate;
+  });
+
+  contacts[foundIndex] = {
+    id: foundIndex + 1,
+    name: editInputName.value,
+    email: editInputEmail.value,
+    phone: editInputPhone.value,
+    tag: editInputTag.value,
+  };
+
+  showContact();
+  hideEditModal();
+};
+
+// const validateInputs = () => {
+//   const name = contactInputName.value;
+//   const email = contactInputEmail.value;
+//   const phone = contactInputPhone.value;
+//   const tag = contactInputTag.value;
+
+//   if (name.length < 2) {
+//     inputNameError.innerHTML = `<p class = "error">نام باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+//   } else {
+//     inputNameError.innerHTML = "";
+//   }
+
+//   if (!email.includes("@gmail.com")) {
+//     inputEmailError.innerHTML = `<p class = "error">ایمیل نامعتبر می‌باشد.</p>`;
+//   } else {
+//     inputEmailError.innerHTML = "";
+//   }
+
+//   if (phone.length < 11) {
+//     inputPhoneError.innerHTML = `<p class = "error">شماره تلفن باید 11 کاراکتر باشد.</p>`;
+//   } else {
+//     inputPhoneError.innerHTML = "";
+//   }
+
+//   if (isNaN(phone)) {
+//     inputPhoneError2.innerHTML = `<p class = "error">شماره تلفن نمیتواند شامل حروف یا کاراکتر های خاص باشد.</p>`;
+//   } else {
+//     inputPhoneError2.innerHTML = "";
+//   }
+
+//   if (tag.length < 2) {
+//     inputTagError.innerHTML = `<p class = "error">تگ باید حداقل 2 کاراکتر یا بیشتر باشد.</p>`;
+//   } else {
+//     inputTagError.innerHTML = "";
+//   }
+// };
 
 const clearInputs = () => {
   contactInputName.value = "";
@@ -181,6 +249,13 @@ const clearInputs = () => {
   inputPhoneError2.innerHTML = "";
 };
 
+const clearEditInputs = () => {
+  editInputName.value = "";
+  editInputEmail.value = "";
+  editInputPhone.value = "";
+  editInputTag.value = "";
+};
+
 window.addEventListener("load", () => {
   showContact();
   contactsCount();
@@ -189,3 +264,7 @@ window.addEventListener("load", () => {
 contactAddBtn.addEventListener("click", showAddModal);
 addModalCancelBtn.addEventListener("click", hideAddModal);
 addModalConfirmBtn.addEventListener("click", createContact);
+removeModalCancel.addEventListener("click", hideRemoveModal);
+removeModalConfirm.addEventListener("click", removeContact);
+editModalConfirm.addEventListener("click", editContact);
+editModalCancel.addEventListener("click", hideEditModal);

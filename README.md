@@ -8,6 +8,14 @@ With this app, you can seamlessly add, edit, search, and delete contacts while e
 
 ---
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="https://github.com/oos-amin/oos-amin/blob/main/Screenshot%20(47).png?raw=true" alt="App Screenshot" width="80%">
+</p>
+
+---
+
 ## ✨ Key Features
 
 - ➕ **Add Contacts**: Quickly add new contacts with detailed information.
@@ -29,14 +37,6 @@ The following technologies were used to build this project:
 | <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white" /> | Styling & Animations |
 | <img src="https://img.shields.io/badge/javascript-%23F7DF1E.svg?style=flat&logo=javascript&logoColor=black" /> | Logic & Data Management |
 | <img src="https://img.shields.io/badge/localStorage-%23FFD700.svg?style=flat&logo=html5&logoColor=black" /> | Browser-based Storage |
-
----
-
-## 📸 Screenshots
-
-<p align="center">
-  <img src="https://via.placeholder.com/800x400?text=Your+App+Screenshot+Here" alt="App Screenshot" width="80%">
-</p>
 
 ---
 

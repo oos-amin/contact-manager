@@ -497,6 +497,10 @@ button {
   .contact-box {
     width: 100%;
   }
+  .contacts__container {
+    max-height: 90rem;
+    min-height: 90rem;
+  }
 }
 
 @media (max-width: 768px) {

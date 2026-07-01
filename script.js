@@ -43,10 +43,15 @@ const toast = document.querySelector(".toast");
 const toastContent = document.querySelector(".toast__content");
 const toastTitle = document.querySelector(".toast__content-title");
 
+const paginationContainer = document.querySelector(".pagination-container");
+
 let contacts = [];
 
 let contactIdToRemove = null;
 let contactIdToUpdate = null;
+
+let currentPage = 1;
+let itemsPerPage = 9;
 
 const showAddModal = () => {
   addModal.classList.remove("hidden");
@@ -116,16 +121,21 @@ const createContact = () => {
     clearInputs();
     hideAddModal();
     contactsCount();
+    generatePagination();
     showToast("success", "مخاطب اضافه شد.");
     saveLocalStorage();
   }
 };
 
 const showContact = () => {
+  const fistIndex = (currentPage - 1) * itemsPerPage;
+  const lastIndex = fistIndex + itemsPerPage;
+  const paginatedItems = contacts.slice(fistIndex, lastIndex);
+
   contactsContainer.innerHTML = "";
 
   if (contacts.length) {
-    contacts.forEach((contact) => {
+    paginatedItems.forEach((contact) => {
       contactsContainer.insertAdjacentHTML(
         "beforeend",
         `
@@ -191,6 +201,8 @@ const removeContact = () => {
 
   contacts.splice(foundIndex, 1);
 
+  updatePage();
+  generatePagination();
   hideRemoveModal();
   showContact();
   contactsCount();
@@ -437,10 +449,53 @@ const showToast = (status, message) => {
   }, 2000);
 };
 
+const generatePagination = () => {
+  const pagesCount = Math.ceil(contacts.length / itemsPerPage);
+
+  paginationContainer.innerHTML = "";
+
+  for (let i = 0; i < pagesCount; i++) {
+    paginationContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+        <span class="pagination ${currentPage === i + 1 ? "pagination--active" : ""}" onclick="changePageHandler(${i + 1})">${i + 1}</span>
+      `,
+    );
+  }
+};
+
+const changePageHandler = (userSelectedPage) => {
+  currentPage = userSelectedPage;
+  const pagesNumber = document.querySelectorAll(".pagination");
+
+  pagesNumber.forEach(function (pageNumber) {
+    if (+pageNumber.innerHTML === currentPage) {
+      pageNumber.classList.add("pagination--active");
+    } else {
+      pageNumber.classList.remove("pagination--active");
+    }
+  });
+
+  showContact();
+};
+
+const updatePage = () => {
+  const pagesCount = Math.ceil(contacts.length / itemsPerPage);
+
+  if (currentPage > pagesCount && pagesCount > 0) {
+    currentPage = pagesCount;
+  }
+
+  if (contacts.length === 0) {
+    currentPage = 1;
+  }
+};
+
 window.addEventListener("load", () => {
   getLocalStorage();
   showContact();
   contactsCount();
+  generatePagination();
 });
 
 searchInput.addEventListener("keyup", searchContact);
